@@ -7,7 +7,7 @@ import { Container } from '@mui/material';
 function App() {
   return (
     <div className="App">
-      <Container sx={{ marginTop: 5 }} maxWidth="md">
+      <Container maxWidth="md">
         <Routes>
           <Route path='/' element={<Tape />} />
           <Route path='/profile/:id' element={<Profile />} />

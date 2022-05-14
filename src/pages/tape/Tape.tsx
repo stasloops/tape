@@ -5,39 +5,34 @@ import { Link } from 'react-router-dom'
 import AddPost from '../../components/add-post/AddPost'
 import { getPosts } from '../../state/fetchPosts'
 import './Tape.scss'
+import { PostType } from '../../type/postType'
 
 const Tape: FC = () => {
-    const [posts] = useGlobalState('posts')
+    const [ posts ] = useGlobalState('posts')
 
     useEffect(() => {
         getPosts()
     }, [])
 
-    useEffect(() => {
-        console.log(posts);
-    }, [posts])
-
-
     return (
         <div className='tape'>
-            <Typography sx={{ mb: '20px' }} variant='h3'>Posts</Typography>
+            <Typography variant='h3'>Posts</Typography>
             <AddPost />
             {
-                posts.map((item: any) => (
+                posts?.map((item: PostType) => (
                     <Link key={`${item.id}_${item.title}`} to={`profile/${item.userId}`}>
-                        <Card sx={{ mt: '10px' }}>
+                        <Card className='tape__card'>
                             <CardContent>
                                 <Typography  >
                                     {item.title}
                                 </Typography>
-                                <Typography sx={{ mt: '10px' }} color="text.secondary">
+                                <Typography color="text.secondary">
                                     {item.body}
                                 </Typography>
                             </CardContent>
                         </Card>
                     </Link>
                 ))
-
             }
         </div>
     )

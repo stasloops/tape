@@ -6,39 +6,34 @@ import { UserType } from '../../type/userType'
 const Profile: FC = () => {
     const { id } = useParams()
     const [user, setUser] = useState<UserType>()
+
     const getUser = async () => {
         await fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
             .then(response => response.json())
             .then(data => setUser(data));
     }
 
-    useEffect((): any => {
+    useEffect(() => {
         if (id === '100') {
-            return null
+            return
         }
         else {
             getUser()
         }
-
     }, [id])
-
-    useEffect(() => {
-        console.log(user);
-    }, [user])
-
 
     return (
         <div>
-            <Typography sx={{ mb: '20px' }} variant='h3'>Posts</Typography>
-            <Typography sx={{ mb: '0' }} variant='h5'>userId {id}</Typography>
+            <Typography variant='h3'>Posts</Typography>
+            <Typography variant='h5'>userId {id}</Typography>
             {
                 user ?
-                    <Card sx={{ mt: '10px' }}>
+                    <Card>
                         <CardContent>
                             <Typography  >
                                 {user?.name}
                             </Typography>
-                            <Typography sx={{ mt: '10px' }} color="text.secondary">
+                            <Typography color="text.secondary">
                                 {user?.email}
                             </Typography>
                         </CardContent>
